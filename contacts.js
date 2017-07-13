@@ -7,9 +7,9 @@ const grabber = function () {
 const setter = function (value) {
   contactStorage = value
 }
-// const invalidGrabber = function (){
-//   return invalidContacts
-// }
+ const invalidGrabber = function (){
+   return invalidContacts
+ }
 
 let contactStorage = []
 
@@ -169,7 +169,7 @@ module.exports = {
   addContact,
   grabber,
   setter,
-  // invalidGrabber
+  invalidGrabber
 }
 
 // console.log("contactStorage", contactStorage);

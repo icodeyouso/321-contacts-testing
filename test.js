@@ -1,7 +1,7 @@
 const addContact = require("./contacts.js").addContact
 
 const grabber = require("./contacts.js").grabber// grabber function from contacts from contacts.js
-// const invalidGrabber = require("./contacts.js").invalidGrabber//function that returns invalid data  array 
+const invalidGrabber = require("./contacts.js").invalidGrabber//function that returns invalid data  array 
 
 const setter = require("./contacts.js").setter//setter function from contacts.js
 
@@ -24,14 +24,10 @@ const expectedSingleContact = [{
   email: 'join@gmail.com'
 }]
 
-
 //only after the above is working, TDD:
 // red: write a failing test: if i give add contact a number, it SHOULDN'T add it to contact storage
-console.log(grabber([0]))
-console.log(expectedSingleContact[0])
+
 console.assert((grabber()[0].email === expectedSingleContact[0].email), "i failed on valid data for  addContact")
-
-
 
 setter([])
 
@@ -45,8 +41,6 @@ catch (ex) {
 //expected error
 }
 
-
-
 //use grabber to confirm that contactStorage has NOT been edited--does not contain invalid data
 let grabberResult = grabber()
 // console.log(grabberResult)
@@ -54,12 +48,13 @@ let grabberResult = grabber()
 console.assert(Array.isArray(grabberResult), "not an array")
 
 console.assert(grabberResult.length === 0, "grabberesult was to be empty")
+setter([])
 
+//NOW TESTING ADD CONTACTS
 
+ let grabInvalidResult = invalidGrabber()
 
-// let grabInvalidResult = invalidGrabber()
+ console.assert(Array.isArray(grabInvalidResult), "i am not an array")
 
-// console.assert(Array.isArray(grabInvalidResult), "i am not an array")
-
-// console.assert(grabInvalidResult.length === 0, "grabinvalid was to be empty")
-  console.log("i hit the bottom of file")
+ console.assert(grabInvalidResult.length === 0, "grabinvalid was to be empty")
+console.log("i hit the bottom of file")
