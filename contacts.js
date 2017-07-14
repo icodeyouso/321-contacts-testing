@@ -1,4 +1,10 @@
+
+
+
 const print = require('node-print')
+const invalidContacts = []
+let contactStorage = []
+
 const grabber = function () {
   return contactStorage
 }
@@ -9,8 +15,6 @@ const invalidGrabber = function (){
    return invalidContacts
  }
  
-const invalidContacts = []
-let contactStorage = []
 
 const newContactsToAdd = [{
   "first_name": "Tanny",  
@@ -92,6 +96,18 @@ const newContactsToAdd = [{
   "first_name": "Winston",
   "last_name": "Hixley",
   "email": "whixleyj@homestead.com"
+}, {
+  "first_name": 55 , 
+  "last_name": "Myall", 
+  "email": "tmyall1@instagram.com"
+}, {
+  "first_name": "virginia" , 
+  "last_name": "cankett", 
+  "email": true
+}, {
+  "first_name": "wildon" , 
+  "last_name": 22, 
+  "email": "whedleyd@purevolume.com"
 }]
 
 const addContact = function (firstName, lastName, email) {
@@ -138,6 +154,9 @@ const printContacts = function (contacts) {
   print.pt(firstNames)
 }
 
+addContacts(newContactsToAdd)
+printContacts(contactStorage)
+printContacts(invalidContacts)
 module.exports = {
   addContact,
   grabber,
