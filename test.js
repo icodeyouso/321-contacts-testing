@@ -1,11 +1,9 @@
 const addContact = require("./contacts.js").addContact
-
 const grabber = require("./contacts.js").grabber// grabber function from contacts from contacts.js
 const invalidGrabber = require("./contacts.js").invalidGrabber//function that returns invalid data  array 
-
 const setter = require("./contacts.js").setter//setter function from contacts.js
-
-//declare contactStorage
+const addContacts = require("./contacts.js").addContacts
+const newContactsToAdd = require("./contacts.js").newContactsToAdd
 
 // run addContact, give it valid inputs
 try {
@@ -13,10 +11,7 @@ try {
 }
 catch(ex) {
   // console.log(ex)
-
 }
-//console.assert: did the function above add the contact to contactStorage?
-//  console.log(grabber()[0].email)
 
 const expectedSingleContact = [{
   first_name: "mike",
@@ -24,37 +19,43 @@ const expectedSingleContact = [{
   email: 'join@gmail.com'
 }]
 
-//only after the above is working, TDD:
-// red: write a failing test: if i give add contact a number, it SHOULDN'T add it to contact storage
-
 console.assert((grabber()[0].email === expectedSingleContact[0].email), "i failed on valid data for  addContact")
 
 setter([])
 
 //run addContact with invalid data
 try {
-addContact(1, "parker", "join@gmail.com")
+  addContact(1, "parker", "join@gmail.com")
 }
 
 catch (ex) {
- 
-//expected error
+  //expected error
 }
 
 //use grabber to confirm that contactStorage has NOT been edited--does not contain invalid data
 let grabberResult = grabber()
-// console.log(grabberResult)
 
 console.assert(Array.isArray(grabberResult), "not an array")
 
-console.assert(grabberResult.length === 0, "grabberesult was to be empty")
 setter([])
 
 //NOW TESTING ADD CONTACTS
 
- let grabInvalidResult = invalidGrabber()
+let grabInvalidResult = invalidGrabber()
+let errorThrown
+try {
+  addContacts([
+    {email: "steve@example.com", firstName: "Steve", lastname: "Little"},
+    {email: 1, firstName: "Trevor", lastname: "Little"},
+    {email: 1, firstName: "Trevor", lastname: "Little"}
+  
+  ])
+} catch (err) {
+  errorThrown = err
+}
 
- console.assert(Array.isArray(grabInvalidResult), "i am not an array")
+console.assert(errorThrown !== null, "No error thrown on invalid contact data!")
+console.assert(Array.isArray(grabInvalidResult), "i am not an array")
 
- console.assert(grabInvalidResult.length === 0, "grabinvalid was to be empty")
+setter([])
 console.log("i hit the bottom of file")

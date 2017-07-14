@@ -1,16 +1,15 @@
 const print = require('node-print')
-
-
 const grabber = function () {
   return contactStorage
 }
 const setter = function (value) {
-  contactStorage = value
+  contactStorage.push(value)
 }
- const invalidGrabber = function (){
+const invalidGrabber = function (){
    return invalidContacts
  }
-
+ 
+const invalidContacts = []
 let contactStorage = []
 
 const newContactsToAdd = [{
@@ -58,7 +57,7 @@ const newContactsToAdd = [{
   "last_name": "Lafayette",
   "email": "mlafayettea@bravesites.com"
 }, {
-  "first_name": "Northrop",
+  "first_name": "Northrop", 
   "last_name": "Bauchop",
   "email": "nbauchopb@pagesperso-orange.fr"
 }, {
@@ -78,7 +77,7 @@ const newContactsToAdd = [{
   "last_name": "Bywaters",
   "email": "nbywatersf@shop-pro.jp"
 }, {
-  "first_name": 1,
+  "first_name": "Mercy",
   "last_name": "Browncey",
   "email": "mbr`ownceyg@yelp.com"
 }, {
@@ -95,7 +94,6 @@ const newContactsToAdd = [{
   "email": "whixleyj@homestead.com"
 }]
 
-
 const addContact = function (firstName, lastName, email) {
   //check value of incoming args
   if (typeof firstName === "string" && typeof lastName === "string" && typeof email === "string") {
@@ -106,43 +104,25 @@ const addContact = function (firstName, lastName, email) {
     })
   } else {
     throw new Error("one of your values is not a string")
-   }
+  }
 }
 
-// try {
-//   console.log("try the risky function of your choice")
-// } catch (e) {
-//   console.log("if an error is thrown this is where you will handle it")
-
-// }
-// try {
-//   throw new Error("this is my error")
-
-// } catch(error) {
-//   console.log(error)
-// }
-
-
-
-// addContact("BOB", "Vibert", "tvibert0@illinois.edu");
-
 const addContacts = function (contactData) {
-  const invalidContacts = []
+
   contactData.map(function (contact) {
-   
+    
     try  {
       addContact(contact.first_name, contact.last_name, contact.email);
     }
     catch (ex) {
-      // console.log(ex)
       invalidContacts.push(contact)
-      // console.log(invalidContacts)
-      /// console.flog("contact", contact);
     }
   })
-  // console.log('contactData', contactData);
+ 
+  if(invalidContacts.length > 0) {
+    throw new Error("could not import " + invalidContacts.length + " contacts")
+  }
 }
-
 
 const printContacts = function (contacts) {
   const firstNames = contacts.sort(function (contactA, contactB) {
@@ -156,20 +136,14 @@ const printContacts = function (contacts) {
     return 0
   })
   print.pt(firstNames)
-  // console.log(firstNames)
 }
-
-///////////////////////////////////////////////////////////////////////////
-
-//  addContacts(newContactsToAdd)
-
-// printContacts(contactStorage)
 
 module.exports = {
   addContact,
   grabber,
   setter,
-  invalidGrabber
+  invalidGrabber,
+  addContacts,
+  newContactsToAdd
 }
 
-// console.log("contactStorage", contactStorage);
