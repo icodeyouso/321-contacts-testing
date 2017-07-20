@@ -13,6 +13,7 @@ catch(ex) {
   // console.log(ex)
 }
 
+//json =javascript object notation
 const expectedSingleContact = [{
   first_name: "mike",
   last_name: 'parker',

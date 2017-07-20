@@ -1,6 +1,3 @@
-
-
-
 const print = require('node-print')
 const invalidContacts = []
 let contactStorage = []
@@ -11,13 +8,13 @@ const grabber = function () {
 const setter = function (value) {
   contactStorage.push(value)
 }
-const invalidGrabber = function (){
-   return invalidContacts
- }
- 
+const invalidGrabber = function () {
+  return invalidContacts
+}
+
 
 const newContactsToAdd = [{
-  "first_name": "Tanny",  
+  "first_name": "Tanny",
   "last_name": "Vibert",
   "email": "tvibert0@illinois.edu"
 }, {
@@ -61,7 +58,7 @@ const newContactsToAdd = [{
   "last_name": "Lafayette",
   "email": "mlafayettea@bravesites.com"
 }, {
-  "first_name": "Northrop", 
+  "first_name": "Northrop",
   "last_name": "Bauchop",
   "email": "nbauchopb@pagesperso-orange.fr"
 }, {
@@ -97,16 +94,16 @@ const newContactsToAdd = [{
   "last_name": "Hixley",
   "email": "whixleyj@homestead.com"
 }, {
-  "first_name": 55 , 
-  "last_name": "Myall", 
+  "first_name": 55,
+  "last_name": "Myall",
   "email": "tmyall1@instagram.com"
 }, {
-  "first_name": "virginia" , 
-  "last_name": "cankett", 
+  "first_name": "virginia",
+  "last_name": "cankett",
   "email": true
 }, {
-  "first_name": "wildon" , 
-  "last_name": 22, 
+  "first_name": "wildon",
+  "last_name": 22,
   "email": "whedleyd@purevolume.com"
 }]
 
@@ -126,18 +123,17 @@ const addContact = function (firstName, lastName, email) {
 const addContacts = function (contactData) {
 
   contactData.map(function (contact) {
-    
-    try  {
+
+    try {
       addContact(contact.first_name, contact.last_name, contact.email);
-    }
-    catch (ex) {
+    } catch (ex) {
       invalidContacts.push(contact)
     }
   })
- 
-  if(invalidContacts.length > 0) {
-    throw new Error("could not import " + invalidContacts.length + " contacts")
-  }
+
+  // if(invalidContacts.length > 0) {
+  //   throw new Error("could not import " + invalidContacts.length + " contacts")
+  // }
 }
 
 const printContacts = function (contacts) {
@@ -152,11 +148,14 @@ const printContacts = function (contacts) {
     return 0
   })
   print.pt(firstNames)
+
 }
 
 addContacts(newContactsToAdd)
 printContacts(contactStorage)
-printContacts(invalidContacts)
+console.log("could not import 3 contacts")
+print.pt(invalidContacts)
+// printContacts(invalidContacts)
 module.exports = {
   addContact,
   grabber,
@@ -165,4 +164,3 @@ module.exports = {
   addContacts,
   newContactsToAdd
 }
-
